@@ -9,7 +9,7 @@ int main(void)
     const int screenWidth = 1080; // FIX
     const int screenHeight = 720;
 
-    InitWindow(screenWidth, screenHeight, "Test");
+    InitWindow(screenWidth, screenHeight, "Snake");
 
     SetTargetFPS(60);
     bool looping = true;
