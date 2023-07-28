@@ -1,5 +1,8 @@
+#include <iostream>
 #include "include/raylib.h"
+#include "menus.hpp"
 
+using std::string;
 
 int main(void)
 {
@@ -8,30 +11,30 @@ int main(void)
 
     InitWindow(screenWidth, screenHeight, "Test");
 
-    Vector2 ballPosition = { (float)screenWidth/2, (float)screenHeight/2 }; // REMOVE BALL OBJECT
-
     SetTargetFPS(60);
+    bool looping = true;
+    string screen = "splash";
+    Menus displayScreen;
+    displayScreen.initMenus();
 
-    while (!WindowShouldClose())    // Detect window close button or ESC key
-    {
-        if (IsKeyDown(KEY_RIGHT)) ballPosition.x += 5.0f;
-        if (IsKeyDown(KEY_LEFT)) ballPosition.x -= 2.0f;
-        if (IsKeyDown(KEY_UP)) ballPosition.y -= 2.0f;
-        if (IsKeyDown(KEY_DOWN)) ballPosition.y += 2.0f;
-        
-        
-        BeginDrawing();
-
-            ClearBackground(BLACK);
-            
-
-            DrawText("Congrats! You created your first window!", screenWidth/4, screenHeight/3, 20, LIGHTGRAY);
-
-            DrawCircleV(ballPosition, 50, MAROON);
-
-        EndDrawing();
-        //----------------------------------------------------------------------------------
+    while (looping){
+        if (screen == "splash")
+            screen = displayScreen.splash();
+        else if (screen == "menu")
+            screen = displayScreen.mainMenu();
+        else if (screen == "game")
+            screen = displayScreen.gameScreen();    
+        else if (screen == "gameScreen")
+            screen = displayScreen.gameOver();
+        else if (screen == "gameScreen")
+            screen = displayScreen.instructions();
+        else if (screen == "gameScreen")
+            screen = displayScreen.quitScreen();
+        else{
+            looping = false;
+        }
     }
+    
 
     CloseWindow(); 
     return 0;
