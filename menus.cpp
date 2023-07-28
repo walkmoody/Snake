@@ -1,13 +1,14 @@
 #include <iostream>
 #include "include/raylib.h"
 #include "menus.hpp"
+#include "game.hpp"
 
 void Menus::initMenus(){
     count = 0;
 }
 string Menus::splash(){
-
-    while(count <90 && !WindowShouldClose()){
+ 
+    while(count < 60){
         BeginDrawing();
 
             ClearBackground(BLACK);
@@ -15,41 +16,40 @@ string Menus::splash(){
             DrawText("SNAKE", 300, 300, 20, LIGHTGRAY);
 
         EndDrawing();
-        count ++;
+        if (WindowShouldClose()) // LINE NEEDED TO CLOSE THE GAME
+            return "quit";
+        
+        count++;
     }
-    if (WindowShouldClose() == true)
-        return "quit";
-    else
-        return "menu";
+    return "menu";
 }
 
 string Menus::mainMenu(){
-    while (!WindowShouldClose())    // Detect window close button or ESC key
-    {
-        /*
-        if (IsKeyDown(KEY_RIGHT)) ballPosition.x += 5.0f;
-        if (IsKeyDown(KEY_LEFT)) ballPosition.x -= 2.0f;
-        if (IsKeyDown(KEY_UP)) ballPosition.y -= 2.0f;
-        if (IsKeyDown(KEY_DOWN)) ballPosition.y += 2.0f;
+    while (!WindowShouldClose()){   // Detect window close button or ESC key
+        if (IsKeyDown(KEY_SPACE))
+            return "game";
         
-        */
         BeginDrawing();
 
             ClearBackground(RAYWHITE);
-            
-
-            DrawText("Congrats! You created your first window!", 300/4, 200/3, 20, BLACK);
-
-            //DrawCircleV(ballPosition, 50, MAROON);
+            DrawText("SNAKE THE VIDEO GAME", screenWidth/4, screenHeight/3, 40, BLACK);
 
         EndDrawing();
-        //----------------------------------------------------------------------------------
+
     }
-    return "quit"; // CHANGE TO GAME
+    return "quit";
 }
 
 string Menus::gameScreen(){
-    return "menu";
+    Game mainGame;
+    mainGame.initGame();
+    string screen = mainGame.gameLoop();
+    if (screen == "menu")
+        return "menu";
+    if (screen == "quit")
+        return "quit";
+    else 
+        return "quit";
 }
 
 string Menus::gameOver(){

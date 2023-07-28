@@ -13,5 +13,7 @@ class Menus{
         string instructions();
         string quitScreen();
     private:
+        const int screenWidth = 1080; // FIX
+        const int screenHeight = 720;
         int count = 0;
 };
