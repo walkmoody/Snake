@@ -14,7 +14,7 @@ int main(void)
 
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-        if (IsKeyDown(KEY_RIGHT)) ballPosition.x += 2.0f;
+        if (IsKeyDown(KEY_RIGHT)) ballPosition.x += 5.0f;
         if (IsKeyDown(KEY_LEFT)) ballPosition.x -= 2.0f;
         if (IsKeyDown(KEY_UP)) ballPosition.y -= 2.0f;
         if (IsKeyDown(KEY_DOWN)) ballPosition.y += 2.0f;
@@ -33,10 +33,6 @@ int main(void)
         //----------------------------------------------------------------------------------
     }
 
-    // De-Initialization
-    //--------------------------------------------------------------------------------------
-    CloseWindow();        // Close window and OpenGL context
-    //--------------------------------------------------------------------------------------
-
+    CloseWindow(); 
     return 0;
 }
