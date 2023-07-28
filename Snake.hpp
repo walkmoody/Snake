@@ -10,5 +10,6 @@ class Snake{
         const int screenWidth = 1080; // FIX
         const int screenHeight = 720;
         int snakePosX, snakePosY;
-        
+        Image snake;
+        Texture2D snakeSkin;
 };

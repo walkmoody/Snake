@@ -16,7 +16,7 @@ void Game::initGame(){
 }
 
 void Game::generateBoard(){
-    int width = 960;
+    int width = 950;
     int height = 650;
 
     // Dynamic memory allocation to store pixels data (Color type)
@@ -24,7 +24,7 @@ void Game::generateBoard(){
 
     for (int y = 0; y < height; y++){
         for (int x = 0; x < width; x++){
-            if (((x / 32 + y / 32) /1 ) % 2 == 0) 
+            if (((x / 50 + y / 50) /1 ) % 2 == 0) 
                 pixels[y*width + x] = ORANGE;
             else 
                 pixels[y*width + x] = GOLD;
