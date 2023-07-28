@@ -32,8 +32,10 @@ string Menus::mainMenu(){
         BeginDrawing();
 
             ClearBackground(RAYWHITE);
-            DrawText("SNAKE THE VIDEO GAME", screenWidth/4, screenHeight/3, 40, BLACK);
-
+            DrawText("SNAKE THE VIDEO GAME", screenHeight/4, screenWidth/4, 50, BLACK);
+            //DrawText("SNAKE THE VIDEO GAME", screenWidth/4, screenHeight/4, 50, BLACK);
+            DrawText("Press space to continue", screenWidth/2, screenHeight/3, 20, BLACK);
+    
         EndDrawing();
 
     }
