@@ -24,11 +24,11 @@ int main(void)
             screen = displayScreen.mainMenu();
         else if (screen == "game")
             screen = displayScreen.gameScreen();    
-        else if (screen == "gameScreen")
+        else if (screen == "gameOver")
             screen = displayScreen.gameOver();
-        else if (screen == "gameScreen")
+        else if (screen == "instructions")
             screen = displayScreen.instructions();
-        else if (screen == "gameScreen")
+        else if (screen == "quitScreen")
             screen = displayScreen.quitScreen();
         else{
             looping = false;

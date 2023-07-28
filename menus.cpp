@@ -28,6 +28,8 @@ string Menus::mainMenu(){
     while (!WindowShouldClose()){   // Detect window close button or ESC key
         if (IsKeyDown(KEY_SPACE))
             return "game";
+        if (IsKeyDown(KEY_I))
+            return "instructions";
         
         BeginDrawing();
 
@@ -35,7 +37,7 @@ string Menus::mainMenu(){
             DrawText("SNAKE THE VIDEO GAME", screenHeight/4, screenWidth/4, 50, BLACK);
             //DrawText("SNAKE THE VIDEO GAME", screenWidth/4, screenHeight/4, 50, BLACK);
             DrawText("Press space to continue", screenWidth/2, screenHeight/3, 20, BLACK);
-    
+
         EndDrawing();
 
     }
@@ -59,7 +61,23 @@ string Menus::gameOver(){
 }
 
 string Menus::instructions(){
-    return "menu";
+    while (!WindowShouldClose()){   // Detect window close button or ESC key
+        if (IsKeyDown(KEY_SPACE))
+            return "game";
+        if (IsKeyDown(KEY_P))
+            return "menu";
+        
+        BeginDrawing();
+
+            ClearBackground(RAYWHITE);
+            DrawText("Heres instructions", screenHeight/4, screenWidth/4, 50, BLACK);
+            //DrawText("SNAKE THE VIDEO GAME", screenWidth/4, screenHeight/4, 50, BLACK);
+            DrawText("Use arrows or WASD,", screenWidth/2, screenHeight/3 - 10, 20, BLACK);
+            DrawText("press P to go back or space to start", screenWidth/2, screenHeight/3 + 10, 20, BLACK);
+        EndDrawing();
+
+    }
+    return "quit";
 }
 
 string Menus::quitScreen(){
