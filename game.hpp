@@ -6,7 +6,9 @@ class Game{
     public:
         void initGame();
         void generateBoard();
+        Color randomColor();
         std::string gameLoop();
+        
 
     private:
         const int screenWidth = 1080; // FIX

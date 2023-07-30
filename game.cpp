@@ -15,19 +15,28 @@ void Game::initGame(){
 
 }
 
+Color Game::randomColor(){
+    int c1, c2, c3;
+    c1 = rand() % 255;
+    c2 = rand() % 255;
+    c3 = rand() % 255;
+    return { (unsigned char)c1,  (unsigned char) c2,  (unsigned char) c3, 255};
+}
+
 void Game::generateBoard(){
     int width = 950;
     int height = 650;
-
+    Color Color1 = randomColor();
+    Color Color2 = randomColor();
     // Dynamic memory allocation to store pixels data (Color type)
     Color *pixels = (Color *)malloc(width*height*sizeof(Color));
 
     for (int y = 0; y < height; y++){
         for (int x = 0; x < width; x++){
             if (((x / 50 + y / 50) /1 ) % 2 == 0) 
-                pixels[y*width + x] = ORANGE;
+                pixels[y*width + x] = Color1; // Orange
             else 
-                pixels[y*width + x] = GOLD;
+                pixels[y*width + x] = Color2; // Gold
     }}
 
     checkedIm = {
@@ -57,7 +66,7 @@ string Game::gameLoop(){
     
         BeginDrawing();
 
-            ClearBackground(RAYWHITE);
+            ClearBackground(LIGHTGRAY);
             DrawTexture(checked, screenWidth/2 - checked.width/2, screenHeight/2 - checked.height/2, Fade(WHITE, 0.5f));
             DrawText("Move the snake around with arrow Keys", 10, 10, 20, DARKGRAY);
 

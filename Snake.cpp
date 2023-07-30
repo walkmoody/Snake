@@ -10,7 +10,7 @@ void Snake::initSnake(){
     down = false;
     up = false;
     snake = LoadImage("images/Snake.png");   
-    ImageResize(&snake, 35, 35) ;
+    ImageResize(&snake, charWH, charWH) ;
     snakeSkin = LoadTextureFromImage(snake);
     UnloadImage(snake);     
 }
@@ -20,9 +20,9 @@ void Snake::snakeMovement(float x, float y){
     snakePosY += y;
     if (snakePosX < screenWidth/2 - 475)
         snakePosX -= x;
-    if (snakePosX > screenWidth/2 + 440)
+    if (snakePosX > screenWidth/2 + (475 - charWH))
         snakePosX -= x;
-    if (snakePosY > screenHeight/2 + 290)
+    if (snakePosY > screenHeight/2 + (325 - charWH))
         snakePosY -= y;
     if (snakePosY < screenHeight/2 - 325)
         snakePosY -= y;
@@ -67,5 +67,5 @@ void Snake::inputSnake(){
 
 void Snake::printSnake(){
     DrawTexture(snakeSkin, snakePosX, snakePosY, WHITE);
-    //DrawRectangle(snakePosX, snakePosY, 35, 35, RED);
+
 }
