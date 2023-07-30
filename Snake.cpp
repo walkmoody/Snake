@@ -3,38 +3,39 @@
 #include "Snake.hpp"
 
 void Snake::initSnake(){
-    snakePosX = screenWidth/2 - ((boardX/2) - 5) + 150;
-    snakePosY = screenHeight/2 - ((boardY/2) - 5) + 150;
+    snakePosX[0]  = screenWidth/2 - ((boardX/2) - 5) + 150;
+    snakePosY[0]  = screenHeight/2 - ((boardY/2) - 5) + 150;
+    snakePosX[1]  = screenWidth/2 - ((boardX/2) - 5) + 100;
+    snakePosY[1]  = screenHeight/2 - ((boardY/2) - 5) + 150;
+    snakePosX[2]  = screenWidth/2 - ((boardX/2) - 5) + 50;
+    snakePosY[2]  = screenHeight/2 - ((boardY/2) - 5) + 150;
     right = false;
     left = false;
     down = false;
     up = false;
+    count = 50;
+    snakeLength = 3;
     snake = LoadImage("images/Snake.png");   
     ImageResize(&snake, charWH, charWH) ;
     snakeSkin = LoadTextureFromImage(snake);
     UnloadImage(snake);     
 }
-/*
-950/ 50 = 19
-650 / 50 = 13
------
-19 * 13 = 247
 
-*/
 void Snake::snakeMovement(float x, float y){
-    snakePosX += x;
-    snakePosY += y;
-    if (snakePosX < screenWidth/2 - (boardX/2))
-        snakePosX -= x;
-    if (snakePosX > screenWidth/2 + ((boardX/2) - charWH))
-        snakePosX -= x;
-    if (snakePosY > screenHeight/2 + ((boardY/2) - charWH))
-        snakePosY -= y;
-    if (snakePosY < screenHeight/2 - (boardY/2))
-        snakePosY -= y;
+    snakePosX[0] += x;
+    snakePosY[0] += y;
+    if (snakePosX[0] < screenWidth/2 - (boardX/2))
+        snakePosX[0] -= x;
+    if (snakePosX[0] > screenWidth/2 + ((boardX/2) - charWH))
+        snakePosX[0]  -= x;
+    if (snakePosY[0]  > screenHeight/2 + ((boardY/2) - charWH))
+        snakePosY[0]  -= y;
+    if (snakePosY[0]  < screenHeight/2 - (boardY/2))
+        snakePosY[0]  -= y;
 }
 
 void Snake::inputSnake(){
+    
     if ((IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) && left != true){
         right = true;
         left = false;
@@ -60,18 +61,21 @@ void Snake::inputSnake(){
         up = true;
     }
     
+    
     if (right == true)
-        snakeMovement(5,0);
+        snakeMovement(50,0);
     if (left == true)
-        snakeMovement(-5,0);
+        snakeMovement(-50,0);
     if (up == true)
-        snakeMovement(0,-5);
+        snakeMovement(0,-50);
     if (down == true)
-        snakeMovement(0,+5);
+        snakeMovement(0,+50);
     
 }
 
 void Snake::printSnake(){
-    DrawTexture(snakeSkin, snakePosX, snakePosY, WHITE);
+    for(int i =0; i < snakeLength; i++){
+        DrawTexture(snakeSkin, snakePosX[i], snakePosY[i], WHITE);
+    }
 
 }

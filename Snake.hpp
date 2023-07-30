@@ -14,7 +14,8 @@ class Snake{
         const int boardY = 650;
         const int charWH = 40;
         bool right, left, down, up = false;
-        int snakePosX, snakePosY;
+        int snakePosX[19], snakePosY[13]; 
+        int count, snakeLength;
         Image snake;
         Texture2D snakeSkin;
 };

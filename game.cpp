@@ -12,6 +12,7 @@ void Game::initGame(){
     UnloadImage(board);     
     generateBoard();
     user.initSnake();
+    SetTargetFPS(10); // change method later
 
 }
 
@@ -75,5 +76,6 @@ string Game::gameLoop(){
         EndDrawing();
     }
     UnloadTexture(checked);  
+    SetTargetFPS(60);
     return "menu";
 }
