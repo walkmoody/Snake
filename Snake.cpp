@@ -3,8 +3,8 @@
 #include "Snake.hpp"
 
 void Snake::initSnake(){
-    snakePosX = 400;
-    snakePosY = 300;
+    snakePosX = screenWidth/2 - ((boardX/2) - 5) + 150;
+    snakePosY = screenHeight/2 - ((boardY/2) - 5) + 150;
     right = false;
     left = false;
     down = false;
@@ -14,17 +14,23 @@ void Snake::initSnake(){
     snakeSkin = LoadTextureFromImage(snake);
     UnloadImage(snake);     
 }
+/*
+950/ 50 = 19
+650 / 50 = 13
+-----
+19 * 13 = 247
 
+*/
 void Snake::snakeMovement(float x, float y){
     snakePosX += x;
     snakePosY += y;
-    if (snakePosX < screenWidth/2 - 475)
+    if (snakePosX < screenWidth/2 - (boardX/2))
         snakePosX -= x;
-    if (snakePosX > screenWidth/2 + (475 - charWH))
+    if (snakePosX > screenWidth/2 + ((boardX/2) - charWH))
         snakePosX -= x;
-    if (snakePosY > screenHeight/2 + (325 - charWH))
+    if (snakePosY > screenHeight/2 + ((boardY/2) - charWH))
         snakePosY -= y;
-    if (snakePosY < screenHeight/2 - 325)
+    if (snakePosY < screenHeight/2 - (boardY/2))
         snakePosY -= y;
 }
 
