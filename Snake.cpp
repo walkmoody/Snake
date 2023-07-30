@@ -18,13 +18,18 @@ void Snake::initSnake(){
 void Snake::snakeMovement(float x, float y){
     snakePosX += x;
     snakePosY += y;
-    if (x > 100)
+    if (snakePosX < screenWidth/2 - 475)
         snakePosX -= x;
+    if (snakePosX > screenWidth/2 + 440)
+        snakePosX -= x;
+    if (snakePosY > screenHeight/2 + 290)
+        snakePosY -= y;
+    if (snakePosY < screenHeight/2 - 325)
+        snakePosY -= y;
 }
+
 void Snake::inputSnake(){
-    //if( snakePosX % 5 == 0)
-    
-if ((IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) && left != true){
+    if ((IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) && left != true){
         right = true;
         left = false;
         down = false;
