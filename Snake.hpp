@@ -4,8 +4,10 @@
 class Snake{
     public:
         void initSnake();
+        void foodRand();
         void inputSnake();
         void printSnake();
+        void snakeEat();
         void snakeMovement(float, float);
     private:
         const int screenWidth = 1080; // FIX
@@ -14,8 +16,11 @@ class Snake{
         const int boardY = 650;
         const int charWH = 40;
         bool right, left, down, up = false;
-        int snakePosX[19], snakePosY[13]; 
+        int snakePosX[250], snakePosY[250]; 
         int count, snakeLength;
+        int foodX, foodY;
         Image snake;
         Texture2D snakeSkin;
+        Image body;
+        Texture2D snakeBody;
 };

@@ -9,6 +9,8 @@ void Snake::initSnake(){
     snakePosY[1]  = screenHeight/2 - ((boardY/2) - 5) + 150;
     snakePosX[2]  = screenWidth/2 - ((boardX/2) - 5) + 50;
     snakePosY[2]  = screenHeight/2 - ((boardY/2) - 5) + 150;
+    foodX =  screenWidth/2 - ((boardY/2) - 5) + 400;
+    foodY = screenHeight/2 - ((boardY/2) - 5) + 150;
     right = false;
     left = false;
     down = false;
@@ -18,14 +20,24 @@ void Snake::initSnake(){
     snake = LoadImage("images/Snake.png");   
     ImageResize(&snake, charWH, charWH) ;
     snakeSkin = LoadTextureFromImage(snake);
-    UnloadImage(snake);     
+    UnloadImage(snake);   
+    body = LoadImage("images/snakeBody.png");
+    ImageResize(&body, charWH, charWH) ;
+    snakeBody = LoadTextureFromImage(body); 
+    UnloadImage(body);   
 }
 
 void Snake::snakeMovement(float x, float y){
+    for(int i = 0; i < snakeLength -1; i ++){
+        snakePosX[snakeLength - i - 1] = snakePosX[snakeLength - i - 2];
+        snakePosY[snakeLength - i - 1] = snakePosY[snakeLength - i - 2];
+    }
+
     snakePosX[0] += x;
     snakePosY[0] += y;
+
     if (snakePosX[0] < screenWidth/2 - (boardX/2))
-        snakePosX[0] -= x;
+        snakePosX[0] -= x; // Return Death
     if (snakePosX[0] > screenWidth/2 + ((boardX/2) - charWH))
         snakePosX[0]  -= x;
     if (snakePosY[0]  > screenHeight/2 + ((boardY/2) - charWH))
@@ -72,10 +84,32 @@ void Snake::inputSnake(){
         snakeMovement(0,+50);
     
 }
+void Snake::snakeEat(){
+    if(foodX == snakePosX[0] && foodY == snakePosY[0]){
+        snakeLength++;
+        foodRand();
+    }
+}
+
+void Snake::foodRand(){
+    bool restart = true; // Tests to make sure food is not inside of snake
+    while(restart){
+        restart = false;
+        foodX = screenWidth/2 - ((boardX/2) - 5) + (rand() % 19) * 50;
+        foodY = screenHeight/2 - ((boardY/2) - 5) + (rand() % 13) * 50;
+    for(int i = 0; i < snakeLength; i++){
+        if(foodX == snakePosX[i] && foodY == snakePosY[i]){
+            restart = true;
+            break;
+    }}}
+}
 
 void Snake::printSnake(){
     for(int i =0; i < snakeLength; i++){
-        DrawTexture(snakeSkin, snakePosX[i], snakePosY[i], WHITE);
+        if (i == 0)
+            DrawTexture(snakeSkin, snakePosX[i], snakePosY[i], WHITE);
+        else
+            DrawTexture(snakeBody, snakePosX[i], snakePosY[i], WHITE);
     }
-
+        DrawRectangle(foodX, foodY, 40, 40, BLACK);
 }

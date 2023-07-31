@@ -59,6 +59,7 @@ string Game::gameLoop(){
     while (looping){
 
         user.inputSnake();
+        user.snakeEat();
         if (WindowShouldClose()){ // LINE NEEDED TO CLOSE THE GAME
             return "quit";
         }

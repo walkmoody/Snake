@@ -13,12 +13,11 @@ string Menus::splash(){
 
             ClearBackground(BLACK);
             
-            DrawText("SNAKE", 300, 300, 20, LIGHTGRAY);
+            DrawText("SNAKEEE", 300, 300, 20, LIGHTGRAY);
 
         EndDrawing();
         if (WindowShouldClose()) // LINE NEEDED TO CLOSE THE GAME
             return "quit";
-        
         count++;
     }
     return "menu";
@@ -75,7 +74,6 @@ string Menus::instructions(){
             DrawText("Use arrows or WASD,", screenWidth/2, screenHeight/3 - 10, 20, BLACK);
             DrawText("press P to go back or space to start", screenWidth/2, screenHeight/3 + 10, 20, BLACK);
         EndDrawing();
-
     }
     return "quit";
 }
