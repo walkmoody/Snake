@@ -37,7 +37,7 @@ int main(void)
             looping = false;
         }
     }
-    
+    displayScreen.reWriteHi();
     CloseWindow(); 
     return 0;
 }

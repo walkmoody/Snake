@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "include/raylib.h"
 #include "menus.hpp"
 #include "game.hpp"
@@ -11,7 +12,23 @@
 
 void Menus::initMenus(){
     count = 0;
-    userScore =0;
+    userScore = 0;
+    std::ifstream fin;
+    fin.open("images/files/hiscore.txt");
+    if(fin.eof())
+        hiScore = 0;
+    else 
+        fin >> hiScore;
+    fin.close();
+}
+
+void Menus::reWriteHi(){
+    std::ofstream fout;
+    fout.open("images/files/hiscore.txt");
+    fout << hiScore;
+
+    fout.close();
+
 }
 string Menus::splash(){
     Image fruit = LoadImage("images/apple.png");
@@ -74,7 +91,8 @@ string Menus::mainMenu(){
     SetShaderValue(shader, speedYLoc, &speedY, SHADER_UNIFORM_FLOAT);
 
     float seconds = 0.0f;
-
+    if (userScore > hiScore)
+        hiScore = userScore;
 
     while (!WindowShouldClose()){   // Detect window close button or ESC key
         if (IsKeyDown(KEY_SPACE))
@@ -94,13 +112,15 @@ string Menus::mainMenu(){
 
                 DrawTexture(texture, 0, 0, WHITE);
                 DrawTexture(texture, texture.width, 0, WHITE);
-
+                DrawText("SNAKE THE VIDEO GAME", screenHeight/4, screenWidth/4, 50, WHITE);
             EndShaderMode();
+
             DrawTexture(texture2, 0, 0, WHITE);
             DrawTexture(texture2, texture2.width, 0, WHITE);
-            DrawText("SNAKE THE VIDEO GAME", screenHeight/4, screenWidth/4, 50, WHITE);
-            DrawText("Press space to continue", screenWidth/2, screenHeight/3, 20, WHITE);
-            DrawText(TextFormat("Your score  %01i", userScore), 100, 100, 20, WHITE);
+           
+            DrawText("Press space to continue", screenWidth/2 - 30, screenHeight/3, 20, WHITE);
+            DrawText(TextFormat("Your score: %01i", userScore), 100, 100, 20, WHITE);
+            DrawText(TextFormat("High score: %01i", hiScore), 100, 70, 20, WHITE);
                         
            
 
@@ -128,6 +148,8 @@ string Menus::gameScreen(){
 string Menus::gameOver(){
     return "menu";
 }
+
+
 
 string Menus::instructions(){
     while (!WindowShouldClose()){   // Detect window close button or ESC key
