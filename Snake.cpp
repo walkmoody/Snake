@@ -26,9 +26,19 @@ void Snake::initSnake(){
     ImageResize(&body, charWH, charWH) ;
     snakeBody = LoadTextureFromImage(body); 
     UnloadImage(body);   
+    fruit = LoadImage("images/DragFruit.png");
+    ImageResize(&fruit, charWH, charWH);
+    fruitTexture = LoadTextureFromImage(fruit); 
+    UnloadImage(fruit);   
 }
 bool Snake::gameContinue(){
     return gameCont;
+}
+
+void Snake::close(){
+    UnloadTexture(snakeSkin);
+    UnloadTexture(snakeBody);
+    UnloadTexture(fruitTexture);
 }
 
 void Snake::snakeMovement(float x, float y){
@@ -120,5 +130,5 @@ void Snake::printSnake(){
         else
             DrawTexture(snakeBody, snakePosX[i], snakePosY[i], WHITE);
     }
-        DrawRectangle(foodX, foodY, 40, 40, BLACK);
+        DrawTexture(fruitTexture, foodX, foodY, WHITE);
 }

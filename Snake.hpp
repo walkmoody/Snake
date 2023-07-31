@@ -11,6 +11,7 @@ class Snake{
         bool gameContinue();
         void snakeMovement(float, float);
         int foodCount();
+        void close();
     private:
         const int screenWidth = 1080; // FIX
         const int screenHeight = 720;
@@ -26,4 +27,6 @@ class Snake{
         Texture2D snakeSkin;
         Image body;
         Texture2D snakeBody;
+        Image fruit;
+        Texture2D fruitTexture;
 };

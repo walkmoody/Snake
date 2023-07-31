@@ -79,7 +79,7 @@ string Game::gameLoop(int &userScore){
         EndDrawing();
         userScore = user.foodCount();
     }
-   
+    user.close();
     UnloadTexture(checked);  
     SetTargetFPS(60);
     return "menu";
