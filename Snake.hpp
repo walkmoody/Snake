@@ -24,7 +24,15 @@ class Snake{
         int count, snakeLength;
         int foodX, foodY;
         Image snake;
-        Texture2D snakeSkin;
+        Texture2D snakeSkinRight;
+        Texture2D snakeSkinLeft;
+        Texture2D snakeSkinDown;
+        Texture2D snakeSkinUp;
+        Image snakeTail;
+        Texture2D snakeTailLeft;
+        Texture2D snakeTailUp;
+        Texture2D snakeTailRight;
+        Texture2D snakeTailDown;
         Image body;
         Texture2D snakeBody;
         Image fruit;

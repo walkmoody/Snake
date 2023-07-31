@@ -95,7 +95,6 @@ string Menus::mainMenu(){
             DrawTexture(texture2, 0, 0, WHITE);
             DrawTexture(texture2, texture2.width, 0, WHITE);
             DrawText("SNAKE THE VIDEO GAME", screenHeight/4, screenWidth/4, 50, WHITE);
-            //DrawText("SNAKE THE VIDEO GAME", screenWidth/4, screenHeight/4, 50, BLACK);
             DrawText("Press space to continue", screenWidth/2, screenHeight/3, 20, WHITE);
             DrawText(TextFormat("Your score  %01i", userScore), 100, 100, 20, WHITE);
                         

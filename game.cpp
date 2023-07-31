@@ -57,9 +57,10 @@ string Game::gameLoop(int &userScore){
 
     bool looping = true;
     while (looping){
-
-        user.inputSnake();
+        
         user.snakeEat();
+        user.inputSnake();
+        
         if (WindowShouldClose()){ // LINE NEEDED TO CLOSE THE GAME
             return "quit";
         }
