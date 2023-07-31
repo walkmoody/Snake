@@ -181,11 +181,11 @@ void Snake::printSnake(){
             if(snakePosX[i] == snakePosX[i-1] && snakePosY[i] > snakePosY[i-1])
                 DrawTexture(snakeBody, snakePosX[i], snakePosY[i] +10, WHITE);
             else if(snakePosX[i] == snakePosX[i-1] && snakePosY[i] < snakePosY[i-1])
-                DrawTexture(snakeBody, snakePosX[i] -10, snakePosY[i], WHITE);
+                DrawTexture(snakeBody, snakePosX[i], snakePosY[i] -10, WHITE);
             else if(snakePosX[i] < snakePosX[i-1] && snakePosY[i] == snakePosY[i-1])
                 DrawTexture(snakeBody, snakePosX[i] -10, snakePosY[i], WHITE);
             else if(snakePosX[i] > snakePosX[i-1] && snakePosY[i] == snakePosY[i-1])
-                DrawTexture(snakeBody, snakePosX[i] -10, snakePosY[i], WHITE);
+                DrawTexture(snakeBody, snakePosX[i] +10, snakePosY[i], WHITE);
             else
                 DrawTexture(snakeTailLeft, snakePosX[i], snakePosY[i], WHITE);
             
