@@ -8,6 +8,7 @@ class Snake{
         void inputSnake();
         void printSnake();
         void snakeEat();
+        bool gameContinue();
         void snakeMovement(float, float);
     private:
         const int screenWidth = 1080; // FIX
@@ -16,6 +17,7 @@ class Snake{
         const int boardY = 650;
         const int charWH = 40;
         bool right, left, down, up = false;
+        bool gameCont = true;
         int snakePosX[250], snakePosY[250]; 
         int count, snakeLength;
         int foodX, foodY;

@@ -65,6 +65,8 @@ string Game::gameLoop(){
         }
         if(IsKeyDown(KEY_R))
             return "menu";
+        if(user.gameContinue() == false)
+            return "menu";
     
         BeginDrawing();
 

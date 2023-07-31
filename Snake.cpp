@@ -15,6 +15,7 @@ void Snake::initSnake(){
     left = false;
     down = false;
     up = false;
+    gameCont = true;
     count = 50;
     snakeLength = 3;
     snake = LoadImage("images/Snake.png");   
@@ -25,6 +26,9 @@ void Snake::initSnake(){
     ImageResize(&body, charWH, charWH) ;
     snakeBody = LoadTextureFromImage(body); 
     UnloadImage(body);   
+}
+bool Snake::gameContinue(){
+    return gameCont;
 }
 
 void Snake::snakeMovement(float x, float y){
@@ -44,6 +48,9 @@ void Snake::snakeMovement(float x, float y){
         snakePosY[0]  -= y;
     if (snakePosY[0]  < screenHeight/2 - (boardY/2))
         snakePosY[0]  -= y;
+    for(int i = 1; i < snakeLength -1; i ++)
+        if (snakePosX[0] == snakePosX[i] && snakePosY[0] == snakePosY[i])
+            gameCont = false;
 }
 
 void Snake::inputSnake(){
