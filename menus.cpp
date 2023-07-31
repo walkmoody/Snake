@@ -14,12 +14,15 @@ void Menus::initMenus(){
     userScore =0;
 }
 string Menus::splash(){
- 
-    while(count < 60){
+    Image fruit = LoadImage("images/apple.png");
+    ImageResize(&fruit, 300, 300);
+    Texture2D fruitTexture = LoadTextureFromImage(fruit);
+    UnloadImage(fruit);
+    while(count < 90){
         BeginDrawing();
 
             ClearBackground(BLACK);
-            
+            DrawTexture(fruitTexture, screenWidth/3, screenHeight/4, WHITE);
             DrawText("SNAKEEE", 300, 300, 20, LIGHTGRAY);
 
         EndDrawing();
@@ -27,6 +30,7 @@ string Menus::splash(){
             return "quit";
         count++;
     }
+    UnloadTexture(fruitTexture);
     return "menu";
 }
 

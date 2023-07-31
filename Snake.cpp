@@ -18,7 +18,7 @@ void Snake::initSnake(){
     gameCont = true;
     count = 50;
     snakeLength = 3;
-    snake = LoadImage("images/Snake.png");   
+    snake = LoadImage("images/RealSnake.png");   
     ImageResize(&snake, charWH, charWH);
     snakeSkinUp = LoadTextureFromImage(snake);
     ImageRotateCW(&snake);
@@ -45,7 +45,7 @@ void Snake::initSnake(){
     ImageResize(&body, charWH, charWH) ;
     snakeBody = LoadTextureFromImage(body); 
     UnloadImage(body);   
-    fruit = LoadImage("images/DragFruit.png");
+    fruit = LoadImage("images/apple.png");
     ImageResize(&fruit, charWH, charWH);
     fruitTexture = LoadTextureFromImage(fruit); 
     UnloadImage(fruit);   
@@ -153,16 +153,28 @@ void Snake::printSnake(){
     DrawTexture(fruitTexture, foodX, foodY, WHITE);
     for(int i =0; i < snakeLength; i++){
         if (i == 0){
-            if(right)
+            if(right){
+                DrawTexture(snakeBody, snakePosX[i+1] +10, snakePosY[i+1], WHITE);
                 DrawTexture(snakeSkinRight, snakePosX[i], snakePosY[i], WHITE);
-            else if(left)
+               
+            }
+            else if(left){
+                DrawTexture(snakeBody, snakePosX[i+1] -10, snakePosY[i+1], WHITE);
                 DrawTexture(snakeSkinLeft, snakePosX[i], snakePosY[i], WHITE);
-            else if(up)
+            }
+            else if(up){
+                DrawTexture(snakeBody, snakePosX[i+1], snakePosY[i+1] -10, WHITE);
                 DrawTexture(snakeSkinUp, snakePosX[i], snakePosY[i], WHITE);
-            else if(down)
+            }
+            else if(down){
+                 DrawTexture(snakeBody, snakePosX[i+1], snakePosY[i+1] +10, WHITE);
                 DrawTexture(snakeSkinDown, snakePosX[i], snakePosY[i], WHITE);
-            else 
+               
+            }
+            else {
+                DrawTexture(snakeBody, snakePosX[i+1] +10, snakePosY[i+1], WHITE);
                 DrawTexture(snakeSkinRight, snakePosX[i], snakePosY[i], WHITE);
+            }
         }
         else if (i == snakeLength -1){
             if(snakePosX[i] == snakePosX[i-1] && snakePosY[i] > snakePosY[i-1])
