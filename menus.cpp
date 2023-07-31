@@ -2,6 +2,12 @@
 #include "include/raylib.h"
 #include "menus.hpp"
 #include "game.hpp"
+#if defined(PLATFORM_DESKTOP)
+    #define GLSL_VERSION            330
+#else   // PLATFORM_RPI, PLATFORM_ANDROID, PLATFORM_WEB
+    #define GLSL_VERSION            100
+#endif
+
 
 void Menus::initMenus(){
     count = 0;
@@ -25,23 +31,82 @@ string Menus::splash(){
 }
 
 string Menus::mainMenu(){
+    SetTargetFPS(120);
+    Image space = LoadImage("images/space.png");   
+    ImageResize(&space, screenWidth, screenHeight) ;
+    Texture2D texture  = LoadTextureFromImage(space);
+    UnloadImage(space);
+    Image space2 = LoadImage("images/space2.png");   
+    ImageResize(&space2, screenWidth, screenHeight) ;
+    Texture2D texture2  = LoadTextureFromImage(space2);
+    UnloadImage(space2);   
+    
+    // Load shader and setup location points and values
+    Shader shader = LoadShader(0, TextFormat("images/shaders/wave.fs", GLSL_VERSION));
+
+    int secondsLoc = GetShaderLocation(shader, "secondes");
+    int freqXLoc = GetShaderLocation(shader, "freqX");
+    int freqYLoc = GetShaderLocation(shader, "freqY");
+    int ampXLoc = GetShaderLocation(shader, "ampX");
+    int ampYLoc = GetShaderLocation(shader, "ampY");
+    int speedXLoc = GetShaderLocation(shader, "speedX");
+    int speedYLoc = GetShaderLocation(shader, "speedY");
+
+    // Shader uniform values that can be updated at any time
+    float freqX = 25.0f;
+    float freqY = 25.0f;
+    float ampX = 5.0f;
+    float ampY = 5.0f;
+    float speedX = 1.0f;
+    float speedY = 1.0f;
+
+    float screenSize[2] = { (float)GetScreenWidth(), (float)GetScreenHeight() };
+    SetShaderValue(shader, GetShaderLocation(shader, "size"), &screenSize, SHADER_UNIFORM_VEC2);
+    SetShaderValue(shader, freqXLoc, &freqX, SHADER_UNIFORM_FLOAT);
+    SetShaderValue(shader, freqYLoc, &freqY, SHADER_UNIFORM_FLOAT);
+    SetShaderValue(shader, ampXLoc, &ampX, SHADER_UNIFORM_FLOAT);
+    SetShaderValue(shader, ampYLoc, &ampY, SHADER_UNIFORM_FLOAT);
+    SetShaderValue(shader, speedXLoc, &speedX, SHADER_UNIFORM_FLOAT);
+    SetShaderValue(shader, speedYLoc, &speedY, SHADER_UNIFORM_FLOAT);
+
+    float seconds = 0.0f;
+
+
     while (!WindowShouldClose()){   // Detect window close button or ESC key
         if (IsKeyDown(KEY_SPACE))
             return "game";
         if (IsKeyDown(KEY_I))
             return "instructions";
+
+        seconds += GetFrameTime();
+
+        SetShaderValue(shader, secondsLoc, &seconds, SHADER_UNIFORM_FLOAT);
         
         BeginDrawing();
-
             ClearBackground(RAYWHITE);
-            DrawText("SNAKE THE VIDEO GAME", screenHeight/4, screenWidth/4, 50, BLACK);
+           
+            BeginShaderMode(shader);
+
+
+                DrawTexture(texture, 0, 0, WHITE);
+                DrawTexture(texture, texture.width, 0, WHITE);
+
+            EndShaderMode();
+            DrawTexture(texture2, 0, 0, WHITE);
+            DrawTexture(texture2, texture2.width, 0, WHITE);
+            DrawText("SNAKE THE VIDEO GAME", screenHeight/4, screenWidth/4, 50, WHITE);
             //DrawText("SNAKE THE VIDEO GAME", screenWidth/4, screenHeight/4, 50, BLACK);
-            DrawText("Press space to continue", screenWidth/2, screenHeight/3, 20, BLACK);
-            DrawText(TextFormat("Your score  %01i", userScore), 100, 100, 20, BLACK);
+            DrawText("Press space to continue", screenWidth/2, screenHeight/3, 20, WHITE);
+            DrawText(TextFormat("Your score  %01i", userScore), 100, 100, 20, WHITE);
+                        
+           
 
         EndDrawing();
 
     }
+    UnloadShader(shader);   
+    UnloadTexture(texture);
+    UnloadTexture(texture2); 
     return "quit";
 }
 
