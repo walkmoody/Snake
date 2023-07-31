@@ -8,8 +8,11 @@ int main(void)
 {
     const int screenWidth = 1080; // FIX
     const int screenHeight = 720;
-
+    Image image = LoadImage("images/apple.png");
+    
     InitWindow(screenWidth, screenHeight, "Snake");
+    SetWindowIcon(image);
+    UnloadImage(image);
 
     SetTargetFPS(60);
     bool looping = true;
