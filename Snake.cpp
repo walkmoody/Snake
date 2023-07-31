@@ -19,9 +19,28 @@ void Snake::initSnake(){
     count = 50;
     snakeLength = 3;
     snake = LoadImage("images/Snake.png");   
-    ImageResize(&snake, charWH, charWH) ;
-    snakeSkin = LoadTextureFromImage(snake);
-    UnloadImage(snake);   
+    ImageResize(&snake, charWH, charWH);
+    snakeSkinUp = LoadTextureFromImage(snake);
+    ImageRotateCW(&snake);
+    snakeSkinRight = LoadTextureFromImage(snake);
+    ImageRotateCW(&snake);
+    snakeSkinDown = LoadTextureFromImage(snake);
+    ImageRotateCW(&snake);
+    snakeSkinLeft = LoadTextureFromImage(snake);
+    
+    snakeTail = LoadImage("images/snakeTail.png");   
+    ImageResize(&snakeTail, charWH, charWH);
+    snakeTailUp = LoadTextureFromImage(snakeTail);
+    ImageRotateCW(&snakeTail);
+    snakeTailRight = LoadTextureFromImage(snakeTail);
+    ImageRotateCW(&snakeTail);
+    snakeTailDown = LoadTextureFromImage(snakeTail);
+    ImageRotateCW(&snakeTail);
+    snakeTailLeft = LoadTextureFromImage(snakeTail);
+
+    UnloadImage(snake);
+    UnloadImage(snakeTail);
+
     body = LoadImage("images/snakeBody.png");
     ImageResize(&body, charWH, charWH) ;
     snakeBody = LoadTextureFromImage(body); 
@@ -36,7 +55,14 @@ bool Snake::gameContinue(){
 }
 
 void Snake::close(){
-    UnloadTexture(snakeSkin);
+    UnloadTexture(snakeSkinRight);
+    UnloadTexture(snakeSkinLeft);
+    UnloadTexture(snakeSkinDown);
+    UnloadTexture(snakeSkinUp);
+    UnloadTexture(snakeTailRight);
+    UnloadTexture(snakeTailLeft);
+    UnloadTexture(snakeTailDown);
+    UnloadTexture(snakeTailUp);
     UnloadTexture(snakeBody);
     UnloadTexture(fruitTexture);
 }
@@ -124,11 +150,34 @@ void Snake::foodRand(){
 }
 
 void Snake::printSnake(){
+    DrawTexture(fruitTexture, foodX, foodY, WHITE);
     for(int i =0; i < snakeLength; i++){
-        if (i == 0)
-            DrawTexture(snakeSkin, snakePosX[i], snakePosY[i], WHITE);
+        if (i == 0){
+            if(right)
+                DrawTexture(snakeSkinRight, snakePosX[i], snakePosY[i], WHITE);
+            else if(left)
+                DrawTexture(snakeSkinLeft, snakePosX[i], snakePosY[i], WHITE);
+            else if(up)
+                DrawTexture(snakeSkinUp, snakePosX[i], snakePosY[i], WHITE);
+            else if(down)
+                DrawTexture(snakeSkinDown, snakePosX[i], snakePosY[i], WHITE);
+            else 
+                DrawTexture(snakeSkinRight, snakePosX[i], snakePosY[i], WHITE);
+        }
+        else if (i == snakeLength -1){
+            if(snakePosX[i] == snakePosX[i-1] && snakePosY[i] > snakePosY[i-1])
+                DrawTexture(snakeTailUp, snakePosX[i], snakePosY[i], WHITE);
+            else if(snakePosX[i] == snakePosX[i-1] && snakePosY[i] < snakePosY[i-1])
+                DrawTexture(snakeTailDown, snakePosX[i], snakePosY[i], WHITE);
+            else if(snakePosX[i] < snakePosX[i-1] && snakePosY[i] == snakePosY[i-1])
+                DrawTexture(snakeTailRight, snakePosX[i], snakePosY[i], WHITE);
+            else if(snakePosX[i] > snakePosX[i-1] && snakePosY[i] == snakePosY[i-1])
+                DrawTexture(snakeTailLeft, snakePosX[i], snakePosY[i], WHITE);
+            else
+                DrawTexture(snakeTailLeft, snakePosX[i], snakePosY[i], WHITE);
+        }
         else
+        
             DrawTexture(snakeBody, snakePosX[i], snakePosY[i], WHITE);
     }
-        DrawTexture(fruitTexture, foodX, foodY, WHITE);
 }
