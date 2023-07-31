@@ -5,6 +5,7 @@
 
 void Menus::initMenus(){
     count = 0;
+    userScore =0;
 }
 string Menus::splash(){
  
@@ -36,6 +37,7 @@ string Menus::mainMenu(){
             DrawText("SNAKE THE VIDEO GAME", screenHeight/4, screenWidth/4, 50, BLACK);
             //DrawText("SNAKE THE VIDEO GAME", screenWidth/4, screenHeight/4, 50, BLACK);
             DrawText("Press space to continue", screenWidth/2, screenHeight/3, 20, BLACK);
+            DrawText(TextFormat("Your score  %01i", userScore), 100, 100, 20, BLACK);
 
         EndDrawing();
 
@@ -46,7 +48,7 @@ string Menus::mainMenu(){
 string Menus::gameScreen(){
     Game mainGame;
     mainGame.initGame();
-    string screen = mainGame.gameLoop();
+    string screen = mainGame.gameLoop(userScore);
     if (screen == "menu")
         return "menu";
     if (screen == "quit")

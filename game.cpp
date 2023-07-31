@@ -53,7 +53,7 @@ void Game::generateBoard(){
     UnloadImage(checkedIm);
 }
 
-string Game::gameLoop(){
+string Game::gameLoop(int &userScore){
 
     bool looping = true;
     while (looping){
@@ -72,12 +72,14 @@ string Game::gameLoop(){
 
             ClearBackground(LIGHTGRAY);
             DrawTexture(checked, screenWidth/2 - checked.width/2, screenHeight/2 - checked.height/2, Fade(WHITE, 0.5f));
-            DrawText("Move the snake around with arrow Keys", 10, 10, 20, DARKGRAY);
+            DrawText(TextFormat("Score: %01i", user.foodCount()), 10, 10, 20, DARKGRAY);
 
             user.printSnake();
 
         EndDrawing();
+        userScore = user.foodCount();
     }
+   
     UnloadTexture(checked);  
     SetTargetFPS(60);
     return "menu";

@@ -10,6 +10,7 @@ class Snake{
         void snakeEat();
         bool gameContinue();
         void snakeMovement(float, float);
+        int foodCount();
     private:
         const int screenWidth = 1080; // FIX
         const int screenHeight = 720;

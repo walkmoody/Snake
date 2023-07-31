@@ -97,7 +97,9 @@ void Snake::snakeEat(){
         foodRand();
     }
 }
-
+int Snake::foodCount(){
+    return snakeLength -3;
+}
 void Snake::foodRand(){
     bool restart = true; // Tests to make sure food is not inside of snake
     while(restart){

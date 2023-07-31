@@ -7,7 +7,7 @@ class Game{
         void initGame();
         void generateBoard();
         Color randomColor();
-        std::string gameLoop();
+        std::string gameLoop(int& userScore);
         
 
     private:
