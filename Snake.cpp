@@ -18,7 +18,7 @@ void Snake::initSnake(){
     gameCont = true;
     count = 50;
     snakeLength = 3;
-    snake = LoadImage("images/RealSnake.png");   
+    snake = LoadImage("images/Snake.png");   
     ImageResize(&snake, charWH, charWH);
     snakeSkinUp = LoadTextureFromImage(snake);
     ImageRotateCW(&snake);
