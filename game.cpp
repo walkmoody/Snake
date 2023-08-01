@@ -1,7 +1,11 @@
 #include <iostream>
 #include "include/raylib.h"
 #include "game.hpp"
-
+#if defined(PLATFORM_DESKTOP)
+    #define GLSL_VERSION            330
+#else   // PLATFORM_RPI, PLATFORM_ANDROID, PLATFORM_WEB
+    #define GLSL_VERSION            100
+#endif
 
 using std::string;
 
@@ -54,9 +58,40 @@ void Game::generateBoard(){
 }
 
 string Game::gameLoop(int &userScore){
+    shader = LoadShader(0, TextFormat("images/shaders/wave.fs", GLSL_VERSION));
 
+    int secondsLoc = GetShaderLocation(shader, "secondes");
+    int freqXLoc = GetShaderLocation(shader, "freqX");
+    int freqYLoc = GetShaderLocation(shader, "freqY");
+    int ampXLoc = GetShaderLocation(shader, "ampX");
+    int ampYLoc = GetShaderLocation(shader, "ampY");
+    int speedXLoc = GetShaderLocation(shader, "speedX");
+    int speedYLoc = GetShaderLocation(shader, "speedY");
+
+    // Shader uniform values that can be updated at any time
+    float freqX = 25.0f;
+    float freqY = 25.0f;
+    float ampX = 5.0f;
+    float ampY = 5.0f;
+    float speedX = 1.0f;
+    float speedY = 1.0f;
+
+    float screenSize[2] = { (float)GetScreenWidth(), (float)GetScreenHeight() };
+    SetShaderValue(shader, GetShaderLocation(shader, "size"), &screenSize, SHADER_UNIFORM_VEC2);
+    SetShaderValue(shader, freqXLoc, &freqX, SHADER_UNIFORM_FLOAT);
+    SetShaderValue(shader, freqYLoc, &freqY, SHADER_UNIFORM_FLOAT);
+    SetShaderValue(shader, ampXLoc, &ampX, SHADER_UNIFORM_FLOAT);
+    SetShaderValue(shader, ampYLoc, &ampY, SHADER_UNIFORM_FLOAT);
+    SetShaderValue(shader, speedXLoc, &speedX, SHADER_UNIFORM_FLOAT);
+    SetShaderValue(shader, speedYLoc, &speedY, SHADER_UNIFORM_FLOAT);
+
+    float seconds = 0.0f;
+     
     bool looping = true;
     while (looping){
+        seconds += GetFrameTime();
+
+        SetShaderValue(shader, secondsLoc, &seconds, SHADER_UNIFORM_FLOAT);
         
         user.snakeEat();
         user.inputSnake();
@@ -72,16 +107,18 @@ string Game::gameLoop(int &userScore){
         BeginDrawing();
 
             ClearBackground(LIGHTGRAY);
+            
             DrawTexture(checked, screenWidth/2 - checked.width/2, screenHeight/2 - checked.height/2, Fade(WHITE, 0.5f));
+           
             DrawText(TextFormat("Score: %01i", user.foodCount()), 10, 10, 20, DARKGRAY);
-
             user.printSnake();
 
         EndDrawing();
         userScore = user.foodCount();
     }
     user.close();
-    UnloadTexture(checked);  
+    UnloadTexture(checked); 
+    UnloadShader(shader);
     SetTargetFPS(60);
     return "menu";
 }
