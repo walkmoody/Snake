@@ -87,8 +87,8 @@ string Game::gameLoop(int &userScore){
 
     float seconds = 0.0f;
      
-    bool looping = true;
-    Color greenBackGround = {0, 200, 30, 255};
+    bool looping = true; 
+    Color BackGround = {200, 130, 255, 255}; // Purple  200 122 255
     while (looping){
         seconds += GetFrameTime();
 
@@ -107,11 +107,11 @@ string Game::gameLoop(int &userScore){
     
         BeginDrawing();
 
-            ClearBackground(greenBackGround); 
+            ClearBackground(BackGround); 
             BeginShaderMode(shader);
-            DrawTexture(checked, screenWidth/2 - checked.width/2, screenHeight/2 - checked.height/2, Fade(WHITE, 0.9f));
+            DrawTexture(checked, screenWidth/2 - checked.width/2, screenHeight/2 - checked.height/2, Fade(WHITE, 0.7f));
             EndShaderMode();
-            DrawText(TextFormat("Score: %01i", user.foodCount()), 10, 10, 20, DARKGRAY);
+            DrawText(TextFormat("Score: %01i", user.foodCount()), screenWidth/2 -40, 10, 25, DARKGRAY);
             user.printSnake();
 
         EndDrawing();
