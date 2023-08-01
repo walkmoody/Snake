@@ -153,45 +153,30 @@ void Snake::printSnake(){
     DrawTexture(fruitTexture, foodX, foodY, WHITE);
     for(int i =0; i < snakeLength; i++){
         if (i == 0){
-            if(right){
-                DrawTexture(snakeBody, snakePosX[i+1] +20, snakePosY[i+1], WHITE);
-                DrawTexture(snakeSkinRight, snakePosX[i], snakePosY[i], WHITE);
-               
-            }
-            else if(left){
-                DrawTexture(snakeBody, snakePosX[i+1] -20, snakePosY[i+1], WHITE);
-                DrawTexture(snakeSkinLeft, snakePosX[i], snakePosY[i], WHITE);
-            }
-            else if(up){
-                DrawTexture(snakeBody, snakePosX[i+1], snakePosY[i+1] -20, WHITE);
-                DrawTexture(snakeSkinUp, snakePosX[i], snakePosY[i], WHITE);
-            }
-            else if(down){
-                DrawTexture(snakeBody, snakePosX[i+1], snakePosY[i+1] +20, WHITE);
-                DrawTexture(snakeSkinDown, snakePosX[i], snakePosY[i], WHITE);
-               
-            }
-            else {
-                DrawTexture(snakeBody, snakePosX[i+1] +20, snakePosY[i+1], WHITE);
-                DrawTexture(snakeSkinRight, snakePosX[i], snakePosY[i], WHITE);
-            }
+           continue;
         }
         else if (i == snakeLength -1){
             if(snakePosX[i] == snakePosX[i-1] && snakePosY[i] > snakePosY[i-1]){
                 DrawTexture(snakeTailUp, snakePosX[i], snakePosY[i], WHITE);
+                DrawTexture(snakeBody, snakePosX[i], snakePosY[i] -25, WHITE);
             }
             else if(snakePosX[i] == snakePosX[i-1] && snakePosY[i] < snakePosY[i-1]){
                 DrawTexture(snakeTailDown, snakePosX[i], snakePosY[i], WHITE);
+                DrawTexture(snakeBody, snakePosX[i], snakePosY[i] +25, WHITE);
 
             }
             else if(snakePosX[i] < snakePosX[i-1] && snakePosY[i] == snakePosY[i-1]){
                 DrawTexture(snakeTailRight, snakePosX[i], snakePosY[i], WHITE);
-                
+                DrawTexture(snakeBody, snakePosX[i] +25, snakePosY[i], WHITE);
             }
-            else if(snakePosX[i] > snakePosX[i-1] && snakePosY[i] == snakePosY[i-1])
+            else if(snakePosX[i] > snakePosX[i-1] && snakePosY[i] == snakePosY[i-1]){
                 DrawTexture(snakeTailLeft, snakePosX[i], snakePosY[i], WHITE);
-            else
+                DrawTexture(snakeBody, snakePosX[i] -25, snakePosY[i], WHITE);
+            }
+            else{
                 DrawTexture(snakeTailLeft, snakePosX[i], snakePosY[i], WHITE);
+                DrawTexture(snakeBody, snakePosX[i] -25, snakePosY[i], WHITE);
+            }
         }
         else{
             DrawTexture(snakeBody, snakePosX[i], snakePosY[i], WHITE);
@@ -208,5 +193,28 @@ void Snake::printSnake(){
             
            
         }
+       
     }
+     if(right){
+                DrawTexture(snakeBody, snakePosX[1] +20, snakePosY[1], WHITE);
+                DrawTexture(snakeSkinRight, snakePosX[0], snakePosY[0], WHITE);
+               
+            }
+            else if(left){
+                DrawTexture(snakeBody, snakePosX[1] -20, snakePosY[1], WHITE);
+                DrawTexture(snakeSkinLeft, snakePosX[0], snakePosY[0], WHITE);
+            }
+            else if(up){
+                DrawTexture(snakeBody, snakePosX[1], snakePosY[1] -20, WHITE);
+                DrawTexture(snakeSkinUp, snakePosX[0], snakePosY[0], WHITE);
+            }
+            else if(down){
+                DrawTexture(snakeBody, snakePosX[1], snakePosY[1] +20, WHITE);
+                DrawTexture(snakeSkinDown, snakePosX[0], snakePosY[0], WHITE);
+               
+            }
+            else {
+                DrawTexture(snakeBody, snakePosX[1] +20, snakePosY[1], WHITE);
+                DrawTexture(snakeSkinRight, snakePosX[0], snakePosY[0], WHITE);
+            }
 }
