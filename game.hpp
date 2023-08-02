@@ -13,6 +13,7 @@ class Game{
     private:
         const int screenWidth = 1080; // FIX
         const int screenHeight = 720;
+        Shader shader;
         Snake user;
         Image board;
         Image checkedIm;

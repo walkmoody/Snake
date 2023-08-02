@@ -109,10 +109,10 @@ string Menus::mainMenu(){
            
             BeginShaderMode(shader);
 
-
                 DrawTexture(texture, 0, 0, WHITE);
                 DrawTexture(texture, texture.width, 0, WHITE);
                 DrawText("SNAKE THE VIDEO GAME", screenHeight/4, screenWidth/4, 50, WHITE);
+
             EndShaderMode();
 
             DrawTexture(texture2, 0, 0, WHITE);
