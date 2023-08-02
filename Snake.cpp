@@ -86,7 +86,7 @@ void Snake::snakeMovement(float x, float y){
         snakePosY[0]  -= y;
     for(int i = 1; i < snakeLength -1; i ++)
         if (snakePosX[0] == snakePosX[i] && snakePosY[0] == snakePosY[i])
-            gameCont = false;
+            gameCont = false; //DEATH
 }
 
 void Snake::inputSnake(){

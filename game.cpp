@@ -17,6 +17,7 @@ void Game::initGame(){
     generateBoard();
     user.initSnake();
     SetTargetFPS(10); // change method later
+    count = 0;
 
 }
 
@@ -93,21 +94,22 @@ string Game::gameLoop(int &userScore){
         seconds += GetFrameTime();
 
         SetShaderValue(shader, secondsLoc, &seconds, SHADER_UNIFORM_FLOAT);
-        
-        user.snakeEat();
-        user.inputSnake();
-        
+        if(user.gameContinue()){
+            user.snakeEat();
+            user.inputSnake();
+        }
+        else if (count < 30){
+            count++;
+        }
+            else return "menu";
         if (WindowShouldClose()){ 
             return "quit";
         }
         if(IsKeyDown(KEY_R))
             return "menu";
-        if(user.gameContinue() == false)
-            return "menu";
-    
+       
+        
         BeginDrawing();
-            
-
             ClearBackground(BackGround); 
             BeginShaderMode(shader);
                 DrawTexture(checked, screenWidth/2 - checked.width/2, screenHeight/2 - checked.height/2, Fade(WHITE, 0.7f));
@@ -117,6 +119,7 @@ string Game::gameLoop(int &userScore){
 
         EndDrawing();
         userScore = user.foodCount();
+       
     }
     user.close();
     UnloadTexture(checked); 

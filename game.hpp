@@ -19,5 +19,7 @@ class Game{
         Image checkedIm;
         Texture2D texture;
         Texture2D checked;
+        int count;
+        bool gameStart = true;
 
 };
