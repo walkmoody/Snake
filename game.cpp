@@ -97,7 +97,7 @@ string Game::gameLoop(int &userScore){
         user.snakeEat();
         user.inputSnake();
         
-        if (WindowShouldClose()){ // LINE NEEDED TO CLOSE THE GAME
+        if (WindowShouldClose()){ 
             return "quit";
         }
         if(IsKeyDown(KEY_R))
@@ -109,7 +109,7 @@ string Game::gameLoop(int &userScore){
 
             ClearBackground(BackGround); 
             BeginShaderMode(shader);
-            DrawTexture(checked, screenWidth/2 - checked.width/2, screenHeight/2 - checked.height/2, Fade(WHITE, 0.7f));
+                DrawTexture(checked, screenWidth/2 - checked.width/2, screenHeight/2 - checked.height/2, Fade(WHITE, 0.7f));
             EndShaderMode();
             DrawText(TextFormat("Score: %01i", user.foodCount()), screenWidth/2 -40, 10, 25, DARKGRAY);
             user.printSnake();
