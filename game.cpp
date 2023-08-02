@@ -59,6 +59,10 @@ void Game::generateBoard(){
 
 string Game::gameLoop(int &userScore){
     shader = LoadShader(0, TextFormat("images/shaders/wave.fs", GLSL_VERSION));
+    Image spaceBackground = LoadImage("images/spaceGame.png");
+    ImageResize(&spaceBackground, screenWidth, screenHeight) ;
+    Texture2D newBackground = LoadTextureFromImage(spaceBackground);
+    UnloadImage(spaceBackground);
 
     int secondsLoc = GetShaderLocation(shader, "secondes");
     int freqXLoc = GetShaderLocation(shader, "freqX");
@@ -106,8 +110,10 @@ string Game::gameLoop(int &userScore){
             return "menu";
     
         BeginDrawing();
+            
 
             ClearBackground(BackGround); 
+            DrawTexture(newBackground, 0, 0, Fade(WHITE, 0.9f));
             BeginShaderMode(shader);
                 DrawTexture(checked, screenWidth/2 - checked.width/2, screenHeight/2 - checked.height/2, Fade(WHITE, 0.7f));
             EndShaderMode();
@@ -118,6 +124,7 @@ string Game::gameLoop(int &userScore){
         userScore = user.foodCount();
     }
     user.close();
+    UnloadTexture(newBackground);
     UnloadTexture(checked); 
     UnloadShader(shader);
     SetTargetFPS(60);

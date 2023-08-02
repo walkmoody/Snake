@@ -40,7 +40,7 @@ string Menus::splash(){
 
             ClearBackground(BLACK);
             DrawTexture(fruitTexture, screenWidth/3, screenHeight/4, WHITE);
-            DrawText("SNAKEEE", 300, 300, 20, LIGHTGRAY);
+            DrawText("SNAKEEE", 250, 300, 30, LIGHTGRAY);
 
         EndDrawing();
         if (WindowShouldClose()) // LINE NEEDED TO CLOSE THE GAME
