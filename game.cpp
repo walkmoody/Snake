@@ -116,6 +116,9 @@ string Game::gameLoop(int &userScore){
             EndShaderMode();
             DrawText(TextFormat("Score: %01i", user.foodCount()), screenWidth/2 -40, 10, 25, DARKGRAY);
             user.printSnake();
+            if (count > 2){
+                DrawRectangle(screenWidth/2 - 300, screenHeight/2 - 300,600, 600, WHITE);
+            }
 
         EndDrawing();
         userScore = user.foodCount();
