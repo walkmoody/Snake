@@ -188,14 +188,11 @@ void Snake::printSnake(){
                 DrawTexture(snakeBody, snakePosX[i] +25, snakePosY[i], WHITE);
             if(snakePosX[i] > snakePosX[i-1])
                 DrawTexture(snakeBody, snakePosX[i] -25, snakePosY[i], WHITE);
-            //else
-            //    DrawTexture(snakeTailLeft, snakePosX[i], snakePosY[i], WHITE);
-            
            
         }
        
     }
-     if(right){
+            if(right){
                 DrawTexture(snakeBody, snakePosX[1] +20, snakePosY[1], WHITE);
                 DrawTexture(snakeSkinRight, snakePosX[0], snakePosY[0], WHITE);
                
