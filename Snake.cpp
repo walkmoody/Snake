@@ -2,8 +2,8 @@
 #include "include/raylib.h"
 #include "Snake.hpp"
 
-void Snake::initSnake(){
-    snakePosX[0]  = screenWidth/2 - ((boardX/2) - 5) + 150;
+void Snake::initSnake(){ 
+    snakePosX[0]  = screenWidth/2 - ((boardX/2) - 5) + 150; //Sets all positions of the snake (always the same starting position)
     snakePosY[0]  = screenHeight/2 - ((boardY/2) - 5) + 150;
     snakePosX[1]  = screenWidth/2 - ((boardX/2) - 5) + 100;
     snakePosY[1]  = screenHeight/2 - ((boardY/2) - 5) + 150;
@@ -18,7 +18,7 @@ void Snake::initSnake(){
     gameCont = true;
     count = 50;
     snakeLength = 3;
-    snake = LoadImage("images/Snake.png");   
+    snake = LoadImage("images/Snake.png");   //Sets all the texturees and resizes them for the snake/fruit
     ImageResize(&snake, charWH, charWH);
     snakeSkinUp = LoadTextureFromImage(snake);
     ImageRotateCW(&snake);
@@ -50,11 +50,12 @@ void Snake::initSnake(){
     fruitTexture = LoadTextureFromImage(fruit); 
     UnloadImage(fruit);   
 }
-bool Snake::gameContinue(){
+
+bool Snake::gameContinue(){ //sends back true/false based on whether the game should continue
     return gameCont;
 }
 
-void Snake::close(){
+void Snake::close(){ //deallocates all the textures
     UnloadTexture(snakeSkinRight);
     UnloadTexture(snakeSkinLeft);
     UnloadTexture(snakeSkinDown);
@@ -67,7 +68,7 @@ void Snake::close(){
     UnloadTexture(fruitTexture);
 }
 
-void Snake::snakeMovement(float x, float y){
+void Snake::snakeMovement(float x, float y){ // moves snake and calculates all of the tail keeps snake on grid
     for(int i = 0; i < snakeLength -1; i ++){
         snakePosX[snakeLength - i - 1] = snakePosX[snakeLength - i - 2];
         snakePosY[snakeLength - i - 1] = snakePosY[snakeLength - i - 2];
@@ -77,20 +78,19 @@ void Snake::snakeMovement(float x, float y){
     snakePosY[0] += y;
 
     if (snakePosX[0] < screenWidth/2 - (boardX/2))
-        snakePosX[0] -= x; // Return Death
+        snakePosX[0] -= x; 
     if (snakePosX[0] > screenWidth/2 + ((boardX/2) - charWH))
-        snakePosX[0]  -= x;
-    if (snakePosY[0]  > screenHeight/2 + ((boardY/2) - charWH))
-        snakePosY[0]  -= y;
-    if (snakePosY[0]  < screenHeight/2 - (boardY/2))
-        snakePosY[0]  -= y;
-    for(int i = 1; i < snakeLength -1; i ++)
+        snakePosX[0] -= x;
+    if (snakePosY[0] > screenHeight/2 + ((boardY/2) - charWH))
+        snakePosY[0] -= y;
+    if (snakePosY[0] < screenHeight/2 - (boardY/2))
+        snakePosY[0] -= y;
+    for(int i = 1; i < snakeLength -1; i ++) // checks to see if there is overlap if true returns Death
         if (snakePosX[0] == snakePosX[i] && snakePosY[0] == snakePosY[i])
             gameCont = false; //DEATH
 }
 
-void Snake::inputSnake(){
-    
+void Snake::inputSnake(){ // Grabs the user input
     if ((IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) && left != true){
         right = true;
         left = false;
@@ -115,8 +115,7 @@ void Snake::inputSnake(){
         down = false;
         up = true;
     }
-    
-    
+
     if (right == true)
         snakeMovement(50,0);
     if (left == true)
@@ -133,10 +132,10 @@ void Snake::snakeEat(){
         foodRand();
     }
 }
-int Snake::foodCount(){
+int Snake::foodCount(){ // Keeps score (does not include the starting length of snake)
     return snakeLength -3;
 }
-void Snake::foodRand(){
+void Snake::foodRand(){ // Randomizes the fruit
     bool restart = true; // Tests to make sure food is not inside of snake
     while(restart){
         restart = false;
@@ -149,7 +148,7 @@ void Snake::foodRand(){
     }}}
 }
 
-void Snake::printSnake(){
+void Snake::printSnake(){ // Calculates which way the snake should be printed and keeps snake attached to itself
     DrawTexture(fruitTexture, foodX, foodY, WHITE);
     for(int i =0; i < snakeLength; i++){
         if (i == 0){
