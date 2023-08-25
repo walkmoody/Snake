@@ -121,7 +121,8 @@ string Game::gameLoop(int &userScore){
             }
             if (count > 2){
                 DrawRectangle(screenWidth/2 - 300, screenHeight/2 - 300,600, 600, WHITE);
-                DrawText(TextFormat("Game over your score was: %01i", user.foodCount()), screenWidth/4, screenHeight/2, 30, DARKGRAY);
+                DrawText(TextFormat("Game Over"), screenWidth/3, screenHeight/2-70, 50, DARKGRAY); // TODO: split up this text
+                DrawText(TextFormat("Your score was: %01i", user.foodCount()), screenWidth/3, screenHeight/2, 30, DARKGRAY); // TODO: split up this text
             }
 
         EndDrawing();
