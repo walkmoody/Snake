@@ -118,6 +118,7 @@ string Game::gameLoop(int &userScore){
             user.printSnake();
             if (count > 2){
                 DrawRectangle(screenWidth/2 - 300, screenHeight/2 - 300,600, 600, WHITE);
+                DrawText(TextFormat("Game over your score was: %01i", user.foodCount()), screenWidth/4, screenHeight/2, 30, DARKGRAY);
             }
 
         EndDrawing();
