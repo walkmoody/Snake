@@ -13,7 +13,7 @@
 void Menus::initMenus(){
     count = 0;
     userScore = 0;
-    std::ifstream fin;
+    std::ifstream fin; // Reads in highscore
     fin.open("images/files/hiscore.txt");
     if(fin.eof())
         hiScore = 0;
