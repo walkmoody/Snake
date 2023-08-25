@@ -6,21 +6,21 @@ using std::string;
 
 int main(void)
 {
-    const int screenWidth = 1080; // FIX
+    const int screenWidth = 1080; 
     const int screenHeight = 720;
     Image image = LoadImage("images/apple.png");
     
     InitWindow(screenWidth, screenHeight, "Snake");
-    SetWindowIcon(image);
+    SetWindowIcon(image); // sets the icon to the apple
     UnloadImage(image);
 
     SetTargetFPS(60);
-    bool looping = true;
+    bool looping = true; 
     string screen = "splash";
-    Menus displayScreen;
+    Menus displayScreen; // Calls class displayScreen
     displayScreen.initMenus();
 
-    while (looping){
+    while (looping){ // continues to loop as strings are returning indicating what should be ran.
         if (screen == "splash")
             screen = displayScreen.splash();
         else if (screen == "menu")
@@ -37,7 +37,7 @@ int main(void)
             looping = false;
         }
     }
-    displayScreen.reWriteHi();
+    displayScreen.reWriteHi(); //checks to see if highscore is bigger if it is; rewrites
     CloseWindow(); 
     return 0;
 }
