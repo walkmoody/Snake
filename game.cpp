@@ -98,11 +98,10 @@ string Game::gameLoop(int &userScore){
             user.snakeEat();
             user.inputSnake();
         }
-        else if (count < 90){ // CHANGE TO BUTTON PRESS;
+        else if (count < 4){ // CHANGE TO BUTTON PRESS;
             count++;
         }
-        else return "menu";
-        
+
         if (WindowShouldClose()){ 
             return "quit";
         }
@@ -117,14 +116,18 @@ string Game::gameLoop(int &userScore){
             EndShaderMode();
             DrawText(TextFormat("Score: %01i", user.foodCount()), screenWidth/2 -40, 10, 25, DARKGRAY);
             user.printSnake();
-            if (count > 0 && count <= 1){
+            if (count > 0 && count < 4){
                 SetTargetFPS(60);
                 DrawRectangle(screenWidth/2 - 300, screenHeight/2 - 300,600, 600, Fade(WHITE, 0.5f));
+                DrawText(TextFormat("Game Over"), screenWidth/2 - 150, screenHeight/2-70, 50, Fade(DARKGRAY, 0.5f));
+                DrawText(TextFormat("Your score was: %01i", user.foodCount()), screenWidth/2 - 150, screenHeight/2, 30, Fade(DARKGRAY, 0.5f));
+                DrawText(TextFormat("Press R to return"), screenWidth/2 - 150, screenHeight/2+50, 30, DARKGRAY);
             }
-            else if (count > 1){
+            else if (count > 3){
                 DrawRectangle(screenWidth/2 - 300, screenHeight/2 - 300,600, 600, WHITE);
-                DrawText(TextFormat("Game Over"), screenWidth/3, screenHeight/2-70, 50, DARKGRAY); // TODO: split up this text
-                DrawText(TextFormat("Your score was: %01i", user.foodCount()), screenWidth/3, screenHeight/2, 30, DARKGRAY); // TODO: split up this text
+                DrawText(TextFormat("Game Over"), screenWidth/2 - 150, screenHeight/2-70, 50, DARKGRAY);
+                DrawText(TextFormat("Your score was: %01i", user.foodCount()), screenWidth/2 - 150, screenHeight/2, 30, DARKGRAY);
+                DrawText(TextFormat("Press R to return"), screenWidth/2 - 150, screenHeight/2+50, 30, DARKGRAY);
             }
 
         EndDrawing();
