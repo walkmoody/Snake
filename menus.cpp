@@ -52,7 +52,7 @@ string Menus::splash(){
 }
 
 string Menus::mainMenu(){
-    SetTargetFPS(120);
+    SetTargetFPS(120); // target fps
     Image space = LoadImage("images/space.png");   
     ImageResize(&space, screenWidth, screenHeight) ;
     Texture2D texture  = LoadTextureFromImage(space);

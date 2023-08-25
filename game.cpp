@@ -16,7 +16,7 @@ void Game::initGame(){
     UnloadImage(board);     
     generateBoard();
     user.initSnake();
-    SetTargetFPS(10); // change method later
+    SetTargetFPS(10); // allows the user to actually see what is going on in the game (keeping them on the grids)
     count = 0;
 
 }
@@ -131,6 +131,6 @@ string Game::gameLoop(int &userScore){
     user.close();
     UnloadTexture(checked); 
     UnloadShader(shader);
-    SetTargetFPS(60);
+    SetTargetFPS(120); //changes frame rate back to 120
     return "menu";
 }
