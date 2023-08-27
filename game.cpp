@@ -98,7 +98,7 @@ string Game::gameLoop(int &userScore){
             user.snakeEat();
             user.inputSnake();
         }
-        else if (count < 4){ // CHANGE TO BUTTON PRESS;
+        else if (count < 4){
             count++;
         }
         else if(IsKeyDown(KEY_SPACE))
