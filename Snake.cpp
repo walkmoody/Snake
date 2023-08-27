@@ -41,7 +41,7 @@ void Snake::initSnake(){
     UnloadImage(snake);
     UnloadImage(snakeTail);
 
-    body = LoadImage("images/snakeBody.png");
+    body = LoadImage("images/SnakeTest.png"); // CHANGE BACK
     ImageResize(&body, charWH, charWH) ;
     snakeBody = LoadTextureFromImage(body); 
     UnloadImage(body);   
