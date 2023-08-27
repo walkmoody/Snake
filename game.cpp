@@ -101,7 +101,9 @@ string Game::gameLoop(int &userScore){
         else if (count < 4){ // CHANGE TO BUTTON PRESS;
             count++;
         }
-
+        else if(IsKeyDown(KEY_SPACE))
+            return "menu";
+        
         if (WindowShouldClose()){ 
             return "quit";
         }
