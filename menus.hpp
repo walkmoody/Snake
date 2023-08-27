@@ -16,7 +16,7 @@ class Menus{
     private:
         const int screenWidth = 1080; // FIX
         const int screenHeight = 720;
-        int hiScore = 2;
+        int hiScore = 0;
         int count = 0;
         int userScore = 0;
 };

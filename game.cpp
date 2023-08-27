@@ -32,21 +32,21 @@ Color Game::randomColor(){
 void Game::generateBoard(){
     int width = 950;
     int height = 650;
-    Color Color1 = randomColor();
-    Color Color2 = randomColor();
+    Color Color1 = randomColor(); // Calls a random num gen
+    Color Color2 = randomColor(); // Calls a random num gen
     // Dynamic memory allocation to store pixels data (Color type)
     Color *pixels = (Color *)malloc(width*height*sizeof(Color));
 
     for (int y = 0; y < height; y++){
         for (int x = 0; x < width; x++){
             if (((x / 50 + y / 50) /1 ) % 2 == 0) 
-                pixels[y*width + x] = Color1; // Orange
+                pixels[y*width + x] = Color1;
             else 
-                pixels[y*width + x] = Color2; // Gold
+                pixels[y*width + x] = Color2; 
     }}
 
     checkedIm = {
-        .data = pixels,             // We can assign pixels directly to data
+        .data = pixels,
         .width = width,
         .height = height,
         .mipmaps = 1,
@@ -127,9 +127,10 @@ string Game::gameLoop(int &userScore){
             }
             else if (count > 3){
                 DrawRectangle(screenWidth/2 - 300, screenHeight/2 - 300,600, 600, WHITE);
-                DrawText(TextFormat("Game Over"), screenWidth/2 - 150, screenHeight/2-70, 50, DARKGRAY);
+                DrawText(TextFormat("Game Over"), screenWidth/2 - 150, screenHeight/2-100, 50, DARKGRAY);
                 DrawText(TextFormat("Your score was: %01i", user.foodCount()), screenWidth/2 - 150, screenHeight/2, 30, DARKGRAY);
-                DrawText(TextFormat("Press R to return"), screenWidth/2 - 150, screenHeight/2+50, 30, DARKGRAY);
+                DrawText(TextFormat("Press Space to restart"), screenWidth/2 - 150, screenHeight/2+50, 30, DARKGRAY);
+                DrawText(TextFormat("Press R to return to menu"), screenWidth/2 - 150, screenHeight/2+100, 30, DARKGRAY);
             }
 
         EndDrawing();

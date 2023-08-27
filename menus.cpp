@@ -26,10 +26,9 @@ void Menus::reWriteHi(){
     std::ofstream fout;
     fout.open("images/files/hiscore.txt");
     fout << hiScore;
-
     fout.close();
-
 }
+
 string Menus::splash(){
     Image fruit = LoadImage("images/apple.png");
     ImageResize(&fruit, 300, 300);
@@ -62,8 +61,7 @@ string Menus::mainMenu(){
     Texture2D texture2  = LoadTextureFromImage(space2);
     UnloadImage(space2);   
     
-    // Load shader and setup location points and values
-    Shader shader = LoadShader(0, TextFormat("images/shaders/wave.fs", GLSL_VERSION));
+    Shader shader = LoadShader(0, TextFormat("images/shaders/wave.fs", GLSL_VERSION)); // Wiggle effect
 
     int secondsLoc = GetShaderLocation(shader, "secondes");
     int freqXLoc = GetShaderLocation(shader, "freqX");
@@ -73,7 +71,6 @@ string Menus::mainMenu(){
     int speedXLoc = GetShaderLocation(shader, "speedX");
     int speedYLoc = GetShaderLocation(shader, "speedY");
 
-    // Shader uniform values that can be updated at any time
     float freqX = 25.0f;
     float freqY = 25.0f;
     float ampX = 5.0f;
@@ -145,7 +142,7 @@ string Menus::gameScreen(){
         return "quit";
 }
 
-string Menus::gameOver(){
+string Menus::gameOver(){ // USELESS
     return "menu";
 }
 
@@ -162,9 +159,9 @@ string Menus::instructions(){
 
             ClearBackground(RAYWHITE);
             DrawText("Heres instructions", screenHeight/4, screenWidth/4, 50, BLACK);
-            //DrawText("SNAKE THE VIDEO GAME", screenWidth/4, screenHeight/4, 50, BLACK);
             DrawText("Use arrows or WASD,", screenWidth/2, screenHeight/3 - 10, 20, BLACK);
             DrawText("press P to go back or space to start", screenWidth/2, screenHeight/3 + 10, 20, BLACK);
+
         EndDrawing();
     }
     return "quit";
