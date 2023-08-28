@@ -130,7 +130,7 @@ string Menus::mainMenu(){
     return "quit";
 }
 
-string Menus::gameScreen(){
+string Menus::gameScreen(){ // activates the game class 
     Game mainGame;
     mainGame.initGame();
     string screen = mainGame.gameLoop(userScore);
@@ -157,7 +157,7 @@ string Menus::instructions(){
         
         BeginDrawing();
 
-            ClearBackground(RAYWHITE);
+            ClearBackground(RAYWHITE); // FIXME add a more colorful and descriptive insturction screen
             DrawText("Heres instructions", screenHeight/4, screenWidth/4, 50, BLACK);
             DrawText("Use arrows or WASD,", screenWidth/2, screenHeight/3 - 10, 20, BLACK);
             DrawText("press P to go back or space to start", screenWidth/2, screenHeight/3 + 10, 20, BLACK);
