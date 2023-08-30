@@ -27,8 +27,6 @@ int main(void)
             screen = displayScreen.mainMenu();
         else if (screen == "game")
             screen = displayScreen.gameScreen();    
-        else if (screen == "gameOver")
-            screen = displayScreen.gameOver();
         else if (screen == "instructions")
             screen = displayScreen.instructions();
         else if (screen == "quitScreen")

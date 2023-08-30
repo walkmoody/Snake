@@ -142,12 +142,6 @@ string Menus::gameScreen(){ // activates the game class
         return "quit";
 }
 
-string Menus::gameOver(){ // USELESS
-    return "menu";
-}
-
-
-
 string Menus::instructions(){
     while (!WindowShouldClose()){   // Detect window close button or ESC key
         if (IsKeyDown(KEY_SPACE))

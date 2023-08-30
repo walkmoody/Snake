@@ -10,7 +10,6 @@ class Menus{
         string splash();
         string mainMenu();
         string gameScreen();
-        string gameOver();
         string instructions();
         string quitScreen();
     private:
