@@ -23,6 +23,7 @@ class Snake{
         int snakePosX[250], snakePosY[250]; 
         int count, snakeLength;
         int foodX, foodY;
+        int snakeTailX, snakeTailY; // used to create copy of tail to not lose information
         Image snake;
         Texture2D snakeSkinRight;
         Texture2D snakeSkinLeft;

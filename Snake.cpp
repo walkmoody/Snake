@@ -72,7 +72,11 @@ void Snake::snakeMovement(float x, float y){ // moves snake and calculates all o
     for(int i = 0; i < snakeLength -1; i ++){
         snakePosX[snakeLength - i - 1] = snakePosX[snakeLength - i - 2];
         snakePosY[snakeLength - i - 1] = snakePosY[snakeLength - i - 2];
-    }
+    } 
+    
+    snakeTailX = snakePosX[snakeLength - 1]; // MAKE A COPY OF THE TAIL TO NOT LOSE INFORMATION
+    snakeTailY = snakePosY[snakeLength - 1];
+    std::cout << snakeTailX << " " << snakeTailY << std::endl;
 
     snakePosX[0] += x;
     snakePosY[0] += y;
@@ -85,7 +89,7 @@ void Snake::snakeMovement(float x, float y){ // moves snake and calculates all o
         snakePosY[0] -= y;
     if (snakePosY[0] < screenHeight/2 - (boardY/2))
         snakePosY[0] -= y;
-    for(int i = 1; i < snakeLength -1; i ++) // checks to see if there is overlap if true returns Death
+    for(int i = 1; i < snakeLength -1; i ++) // checks to see if there is overlap if true returns Death 
         if (snakePosX[0] == snakePosX[i] && snakePosY[0] == snakePosY[i]) 
             gameCont = false; //DEATH
 }
@@ -200,6 +204,9 @@ void Snake::printSnake(){ // Calculates which way the snake should be printed an
     if(!gameCont){
         snakePosX[1] = snakePosX[2];
         snakePosY[1] = snakePosY[2];
+
+        DrawTexture(snakeTailRight, snakeTailX, snakeTailY, WHITE); // Does this work??
+        DrawTexture(snakeBody, snakePosX[snakeLength - 1] +25, snakePosY[snakeLength - 1], WHITE);
     }
         if(right){
             DrawTexture(snakeBody, snakePosX[1] +20, snakePosY[1], WHITE);
