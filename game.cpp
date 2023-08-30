@@ -128,9 +128,9 @@ string Game::gameLoop(int &userScore){
             else if (count > 3){
                 DrawRectangle(screenWidth/2 - 300, screenHeight/2 - 300,600, 600, WHITE);
                 DrawText(TextFormat("Game Over"), screenWidth/2 - 150, screenHeight/2-100, 50, DARKGRAY);
-                DrawText(TextFormat("Your score was: %01i", user.foodCount()), screenWidth/2 - 150, screenHeight/2, 30, DARKGRAY); // FIXME CENTER THE TEXT
-                DrawText(TextFormat("Press Space to restart"), screenWidth/2 - 150, screenHeight/2+50, 30, DARKGRAY);
-                DrawText(TextFormat("Press R to return to menu"), screenWidth/2 - 150, screenHeight/2+100, 30, DARKGRAY);
+                DrawText(TextFormat("Your score was: %01i", user.foodCount()), screenWidth/2 - 150 - (17 + ( user.foodCount() % 10) + 10), screenHeight/2, 30, DARKGRAY); // FIXME CENTER THE TEXT // 17
+                DrawText(TextFormat("Press Space to restart"), (screenWidth/2) - 150 - (22 + 10), screenHeight/2+50, 30, DARKGRAY); // Take the length of the string (22)
+                DrawText(TextFormat("Press R to return to menu"), screenWidth/2 - 150 - (25 + 10), screenHeight/2+100, 30, DARKGRAY); // Length is 25 * 1.5
             }
 
         EndDrawing();

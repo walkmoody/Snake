@@ -86,7 +86,7 @@ void Snake::snakeMovement(float x, float y){ // moves snake and calculates all o
     if (snakePosY[0] < screenHeight/2 - (boardY/2))
         snakePosY[0] -= y;
     for(int i = 1; i < snakeLength -1; i ++) // checks to see if there is overlap if true returns Death
-        if (snakePosX[0] == snakePosX[i] && snakePosY[0] == snakePosY[i])
+        if (snakePosX[0] == snakePosX[i] && snakePosY[0] == snakePosY[i]) 
             gameCont = false; //DEATH
 }
 
@@ -126,15 +126,18 @@ void Snake::inputSnake(){ // Grabs the user input
         snakeMovement(0,+50);
     
 }
+
 void Snake::snakeEat(){
     if(foodX == snakePosX[0] && foodY == snakePosY[0]){
         snakeLength++;
         foodRand();
     }
 }
+
 int Snake::foodCount(){ // Keeps score (does not include the starting length of snake)
     return snakeLength -3;
 }
+
 void Snake::foodRand(){ // Randomizes the fruit
     bool restart = true; // Tests to make sure food is not inside of snake
     while(restart){
@@ -149,10 +152,13 @@ void Snake::foodRand(){ // Randomizes the fruit
 }
 
 void Snake::printSnake(){ // Calculates which way the snake should be printed and keeps snake attached to itself
-    DrawTexture(fruitTexture, foodX, foodY, WHITE);
+    DrawTexture(fruitTexture, foodX, foodY, WHITE); // If death is true do Not print i = 1
     for(int i =0; i < snakeLength; i++){
         if (i == 0){
            continue;
+        }
+        else if (!gameCont && i == 1){ 
+            continue;
         }
         else if (i == snakeLength -1){
             if(snakePosX[i] == snakePosX[i-1] && snakePosY[i] > snakePosY[i-1]){
@@ -191,26 +197,30 @@ void Snake::printSnake(){ // Calculates which way the snake should be printed an
         }
        
     }
-            if(right){
-                DrawTexture(snakeBody, snakePosX[1] +20, snakePosY[1], WHITE);
-                DrawTexture(snakeSkinRight, snakePosX[0], snakePosY[0], WHITE);
-               
-            }
-            else if(left){
-                DrawTexture(snakeBody, snakePosX[1] -20, snakePosY[1], WHITE);
-                DrawTexture(snakeSkinLeft, snakePosX[0], snakePosY[0], WHITE);
-            }
-            else if(up){
-                DrawTexture(snakeBody, snakePosX[1], snakePosY[1] -20, WHITE);
-                DrawTexture(snakeSkinUp, snakePosX[0], snakePosY[0], WHITE);
-            }
-            else if(down){
-                DrawTexture(snakeBody, snakePosX[1], snakePosY[1] +20, WHITE);
-                DrawTexture(snakeSkinDown, snakePosX[0], snakePosY[0], WHITE);
-               
-            }
-            else {
-                DrawTexture(snakeBody, snakePosX[1] +20, snakePosY[1], WHITE);
-                DrawTexture(snakeSkinRight, snakePosX[0], snakePosY[0], WHITE);
-            }
+    if(!gameCont){
+        snakePosX[1] = snakePosX[2];
+        snakePosY[1] = snakePosY[2];
+    }
+        if(right){
+            DrawTexture(snakeBody, snakePosX[1] +20, snakePosY[1], WHITE);
+            DrawTexture(snakeSkinRight, snakePosX[0], snakePosY[0], WHITE);
+            
+        }
+        else if(left){
+            DrawTexture(snakeBody, snakePosX[1] -20, snakePosY[1], WHITE);
+            DrawTexture(snakeSkinLeft, snakePosX[0], snakePosY[0], WHITE);
+        }
+        else if(up){
+            DrawTexture(snakeBody, snakePosX[1], snakePosY[1] -20, WHITE);
+            DrawTexture(snakeSkinUp, snakePosX[0], snakePosY[0], WHITE);
+        }
+        else if(down){
+            DrawTexture(snakeBody, snakePosX[1], snakePosY[1] +20, WHITE);
+            DrawTexture(snakeSkinDown, snakePosX[0], snakePosY[0], WHITE);
+            
+        }
+        else {
+            DrawTexture(snakeBody, snakePosX[1] +20, snakePosY[1], WHITE);
+            DrawTexture(snakeSkinRight, snakePosX[0], snakePosY[0], WHITE);
+        }
 }

@@ -30,7 +30,7 @@ void Menus::reWriteHi(){
 }
 
 string Menus::splash(){
-    Image fruit = LoadImage("images/apple.png");
+    Image fruit = LoadImage("images/DragFruit.png");
     ImageResize(&fruit, 300, 300);
     Texture2D fruitTexture = LoadTextureFromImage(fruit);
     UnloadImage(fruit);
