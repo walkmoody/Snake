@@ -139,7 +139,7 @@ void Snake::snakeEat(){
 }
 
 int Snake::foodCount(){ // Keeps score (does not include the starting length of snake)
-    return snakeLength -3;
+    return snakeLength -3; //Returns to the score to the score board
 }
 
 void Snake::foodRand(){ // Randomizes the fruit
@@ -205,8 +205,8 @@ void Snake::printSnake(){ // Calculates which way the snake should be printed an
         snakePosX[1] = snakePosX[2];
         snakePosY[1] = snakePosY[2];
 
-        DrawTexture(snakeTailRight, snakeTailX, snakeTailY, WHITE); // Does this work??
-        DrawTexture(snakeBody, snakePosX[snakeLength - 1] +25, snakePosY[snakeLength - 1], WHITE);
+        //DrawTexture(snakeTailRight, snakeTailX, snakeTailY, WHITE); // Does this work??
+        //DrawTexture(snakeBody, snakePosX[snakeLength - 1] +25, snakePosY[snakeLength - 1], WHITE); // FIXME
     }
         if(right){
             DrawTexture(snakeBody, snakePosX[1] +20, snakePosY[1], WHITE);
