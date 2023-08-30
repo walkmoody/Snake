@@ -76,7 +76,6 @@ void Snake::snakeMovement(float x, float y){ // moves snake and calculates all o
     
     snakeTailX = snakePosX[snakeLength - 1]; // MAKE A COPY OF THE TAIL TO NOT LOSE INFORMATION
     snakeTailY = snakePosY[snakeLength - 1];
-    std::cout << snakeTailX << " " << snakeTailY << std::endl;
 
     snakePosX[0] += x;
     snakePosY[0] += y;
