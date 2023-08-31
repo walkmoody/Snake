@@ -160,9 +160,6 @@ void Snake::printSnake(){ // Calculates which way the snake should be printed an
         if (i == 0){
            continue;
         }
-        else if (!gameCont && i == 1){ 
-            continue;
-        }
         else if (i == snakeLength -1){
             if(snakePosX[i] == snakePosX[i-1] && snakePosY[i] > snakePosY[i-1]){
                 DrawTexture(snakeTailUp, snakePosX[i], snakePosY[i], WHITE);
@@ -186,6 +183,9 @@ void Snake::printSnake(){ // Calculates which way the snake should be printed an
                 DrawTexture(snakeBody, snakePosX[i] -25, snakePosY[i], WHITE);
             }
         }
+        else if (!gameCont && i == 1){ 
+            continue;
+        }
         else{
             DrawTexture(snakeBody, snakePosX[i], snakePosY[i], WHITE);
             if(snakePosY[i] > snakePosY[i-1])
@@ -200,33 +200,30 @@ void Snake::printSnake(){ // Calculates which way the snake should be printed an
         }
        
     }
-    if(!gameCont){
+    if(!gameCont){  // NEEDS TO PRINT THE SNAKE // Needs to take in to account direct in order to not glitch upon death 
         snakePosX[1] = snakePosX[2];
         snakePosY[1] = snakePosY[2];
-
-        //DrawTexture(snakeTailRight, snakeTailX, snakeTailY, WHITE); // Does this work??
-        //DrawTexture(snakeBody, snakePosX[snakeLength - 1] +25, snakePosY[snakeLength - 1], WHITE); // FIXME
     }
-        if(right){
-            DrawTexture(snakeBody, snakePosX[1] +20, snakePosY[1], WHITE);
-            DrawTexture(snakeSkinRight, snakePosX[0], snakePosY[0], WHITE);
-            
-        }
-        else if(left){
-            DrawTexture(snakeBody, snakePosX[1] -20, snakePosY[1], WHITE);
-            DrawTexture(snakeSkinLeft, snakePosX[0], snakePosY[0], WHITE);
-        }
-        else if(up){
-            DrawTexture(snakeBody, snakePosX[1], snakePosY[1] -20, WHITE);
-            DrawTexture(snakeSkinUp, snakePosX[0], snakePosY[0], WHITE);
-        }
-        else if(down){
-            DrawTexture(snakeBody, snakePosX[1], snakePosY[1] +20, WHITE);
-            DrawTexture(snakeSkinDown, snakePosX[0], snakePosY[0], WHITE);
-            
-        }
-        else {
-            DrawTexture(snakeBody, snakePosX[1] +20, snakePosY[1], WHITE);
-            DrawTexture(snakeSkinRight, snakePosX[0], snakePosY[0], WHITE);
-        }
+    if(right){
+        DrawTexture(snakeBody, snakePosX[1] +20, snakePosY[1], WHITE);
+        DrawTexture(snakeSkinRight, snakePosX[0], snakePosY[0], WHITE);
+        
+    }
+    else if(left){
+        DrawTexture(snakeBody, snakePosX[1] -20, snakePosY[1], WHITE);
+        DrawTexture(snakeSkinLeft, snakePosX[0], snakePosY[0], WHITE);
+    }
+    else if(up){
+        DrawTexture(snakeBody, snakePosX[1], snakePosY[1] -20, WHITE);
+        DrawTexture(snakeSkinUp, snakePosX[0], snakePosY[0], WHITE);
+    }
+    else if(down){
+        DrawTexture(snakeBody, snakePosX[1], snakePosY[1] +20, WHITE);
+        DrawTexture(snakeSkinDown, snakePosX[0], snakePosY[0], WHITE);
+        
+    }
+    else {
+        DrawTexture(snakeBody, snakePosX[1] +20, snakePosY[1], WHITE);
+        DrawTexture(snakeSkinRight, snakePosX[0], snakePosY[0], WHITE);
+    }
 }
