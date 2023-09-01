@@ -34,7 +34,7 @@ string Menus::splash(){
     ImageResize(&fruit, 300, 300);
     Texture2D fruitTexture = LoadTextureFromImage(fruit);
     UnloadImage(fruit);
-    while(count < 90){
+    while(count < 10){
         BeginDrawing();
 
             ClearBackground(BLACK);
